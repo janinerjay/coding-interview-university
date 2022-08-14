@@ -1,5 +1,8 @@
 /* Queues */
 
+// Think BFS!
+// Implementing a cache
+
 function Queue() {
     collection = [];
 

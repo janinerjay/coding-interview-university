@@ -218,6 +218,15 @@ class BST {
 
     // Topological Sort
 
+    // Invert a Binary Tree
+    invertBT(node) {
+        if (node == null) {
+            return null;
+        }
+        [node.left, node.right] = [node.right, node.left];
+        this.invertBT(node.left);
+        this.invertBT(node.right);
+    }
 
 }
 
@@ -239,15 +248,17 @@ bst.add(20);
 // console.log(bst.findMax());
 // console.log(bst.isPresent(4));
 
-console.log(bst.findMinHeight());
-console.log(bst.findMaxHeight());
-console.log(bst.isBalanced());
-bst.add(10);
-console.log(bst.findMinHeight());
-console.log(bst.findMaxHeight());
-console.log(bst.isBalanced());
+// console.log(bst.findMinHeight());
+// console.log(bst.findMaxHeight());
+// console.log(bst.isBalanced());
+// bst.add(10);
+// console.log(bst.findMinHeight());
+// console.log(bst.findMaxHeight());
+// console.log(bst.isBalanced());
 
 console.log(bst.inOrder());
-console.log(bst.preOrder());
-console.log(bst.postOrder());
-console.log(bst.levelOrder());
+console.log(bst.invertBT(bst.root));
+console.log(bst.inOrder());
+// console.log(bst.preOrder());
+// console.log(bst.postOrder());
+// console.log(bst.levelOrder());

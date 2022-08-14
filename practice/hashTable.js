@@ -59,10 +59,29 @@ let HashTable = function () {
     };
 }
 
-let ht = new HashTable();
-ht.add('beau', 'person');
-ht.add('fido', 'dog');
-ht.add('rex', 'dino');
-ht.add('tux', 'penguin');
-console.log(ht.lookup('tux'));
-ht.print();
+// let ht = new HashTable();
+// ht.add('beau', 'person');
+// ht.add('fido', 'dog');
+// ht.add('rex', 'dino');
+// ht.add('tux', 'penguin');
+// console.log(ht.lookup('tux'));
+// ht.print();
+
+
+// ------------------ Two Sum ------------------------
+// Find two elements that add up to a target number
+let nums = [2, 7, 11, 15];
+let target = 9;
+// use complement and a hashtable for one pass
+function twoSum(arr, t) {
+    const hashtable = {};
+    for (let i = 0; i < arr.length; i++) {
+        let complement = t - arr[i];
+        if (hashtable.hasOwnProperty(complement)) {
+            return [hashtable[complement], i]
+        }
+        hashtable[arr[i]] = i;
+    };
+    return null;
+};
+console.log(twoSum(nums, target));

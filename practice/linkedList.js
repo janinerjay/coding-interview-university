@@ -123,15 +123,15 @@ function LinkedList() {
     }
 
     this.reverse = function () {
-        let prev = null;
-        let node = head;
-        while (node) {
-            let temp = node.next;
-            node.next = prev;
-            prev = node;
-            node = temp;
+        let temp = null;
+
+        while (head !== null) {
+            let next = head.next;
+            head.next = temp;
+            [temp, head] = [head, next]
         }
-        head = prev;
+
+        return temp;
     }
 
     this.print = function () {
@@ -143,18 +143,61 @@ function LinkedList() {
         }
         return result.join(' => ');
     }
+
+    this.middleNode = function (start, last) {
+        if (start == null) return null;
+        let slowPointer = start;
+        let fastPointer = start.next;
+        while (head != last) {
+            fastPointer = fastPointer.next;
+            if (fastPointer != last) {
+                fastPointer = fastPointer.next;
+                slowPointer = slowPointer.next;
+            }
+            return slowPointer;
+        }
+    }
+
+    this.binarySearch = function (head, value) {
+        let start = head;
+        let last = null;
+        do {
+            let mid = this.middleNode(start, last);
+            if (mid == null) return null;
+            if (mid.element == value) return mid;
+            else if (value < mid.element) {
+                start = mid.next;
+            } else {
+                last = mid;
+            }
+        } while (last == null || last != start);
+        return null;
+    }
 }
 
+// function reverseDouble(llist) {
+//     let temp = null;
+//     let head = llist;
+//     while(head != null){
+//         [head.next,head.prev] = [head.prev,head.next];
+//         temp = head;
+//         head = head.prev;
+//     }
+//     return temp;
+// }
+
 let l = new LinkedList();
-l.add('Kitten');
-l.add('Puppy');
-l.add('Dog');
-l.add('Cat');
-l.add('Fish');
-console.log(l.size());
-console.log(l.removeAt(3));
-console.log(l.elementAt(3));
-console.log(l.indexOf('Puppy'));
+l.add(1);
+l.add(2);
+l.add(3);
+l.add(4);
+l.add(5);
 console.log(l.print());
-console.log(l.reverse());
-console.log(l.print());
+console.log(l.binarySearch(4));
+// console.log(l.size());
+// console.log(l.removeAt(3));
+// console.log(l.elementAt(3));
+// console.log(l.indexOf('Puppy'));
+// console.log(l.print());
+// console.log(l.reverse());
+// console.log(l.print());
